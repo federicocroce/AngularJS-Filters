@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Filters</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="filter.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.2.5/i18n/angular-locale_es-ar.js"></script>
+    <script src="controller.js"></script>
+
+</head>
+
+<body ng-app>
+<div class="conteiner" ng-controller="filterController">
+    <h1>Native Angular Filters</h1>
+    <hr>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
+                <input type="text" class="form-control" placeholder="Search" ng-model="search">
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        <a href="" ng-click="orderFor('name')">
+                           Names
+                        </a>
+                        <span class="caret" style="cursor: pointer" ng-click="orderFor('-name')"></span>
+                    </th>
+                    <th>Surname</th>
+                    <th>First Day</th>
+                    <th>Salary</th>
+                    <th>Cel</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="employee in staff | orderBy: orderSelected | filter: search">
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.surname}}</td>
+                    <td>{{employee.firstDay | date: 'fullDate'}} hour: {{employee.firstDay | date: 'h:mma'}}</td>
+                    <td>{{employee.salary | currency}}</td>
+                    <td>{{employee.cel}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
